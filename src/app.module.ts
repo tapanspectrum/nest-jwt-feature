@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { boolean } from 'yargs';
-
+ 
 @Module({
   imports: [
     ConfigModule.forRoot(),
