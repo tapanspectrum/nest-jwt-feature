@@ -21,9 +21,7 @@ export class AuthenticationController {
   @UseGuards(LocalAuthGuard)
   @Post('log-in')
   async logIn(@Req() request: RequestWithUser, @Res() response: Response) {
-    console.log('request', 'inside');
     const {user} = request;
-    console.log('userdata', user);
     const cookie = await this.authenticationService.getCookieWithJwtToken(user.id);
     response.setHeader('Set-Cookie', cookie);
     user.password = undefined;
