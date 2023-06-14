@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { boolean } from 'yargs';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -21,7 +23,9 @@ import { boolean } from 'yargs';
         schema: process.env.POSTGRES_SCHEMA,
         synchronize: true,
       })
-    })
+    }),
+    AuthenticationModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
