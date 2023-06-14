@@ -8,13 +8,21 @@ import { LocalStrategy } from './strategies/local.startegy';
 
 import { AuthenticationService } from './authentication.service';
 import { AuthenticationController } from './authentication.controller';
+import { UsersModule } from 'src/users/users.module';
+import { UsersService } from 'src/users/users.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports:[
+    UsersModule,
     PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_ACCESS_SECRET,
-      signOptions: { expiresIn: '60s' },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: process.env.JWT_SECRET_KEY,
+        signOptions: { expiresIn: '60s' },
+      }),
     }),
   ],
   controllers: [AuthenticationController],

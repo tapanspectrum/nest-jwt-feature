@@ -21,6 +21,7 @@ import { UsersModule } from './users/users.module';
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DATABASE,
         schema: process.env.POSTGRES_SCHEMA,
+        entities: ['dist/**/*.entity{.ts,.js}'],
         synchronize: true,
       })
     }),
